@@ -10,12 +10,9 @@ defmodule PointsApi.Application do
     children = [
       # Start the Ecto repository
       PointsApi.Repo,
-      # Start the Telemetry supervisor
-      PointsApiWeb.Telemetry,
-      # Start the PubSub system
-      {Phoenix.PubSub, name: PointsApi.PubSub},
       # Start the Endpoint (http/https)
-      PointsApiWeb.Endpoint
+      PointsApiWeb.Endpoint,
+      PointsApi.Worker
       # Start a worker by calling: PointsApi.Worker.start_link(arg)
       # {PointsApi.Worker, arg}
     ]
