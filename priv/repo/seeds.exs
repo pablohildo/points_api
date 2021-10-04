@@ -1,16 +1,15 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     PointsApi.Repo.insert!(%PointsApi.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
-entries = Enum.map(1..100, fn _ -> %PointsApi.User{points: 0} end)
+# postgresql protocol can not handle 2000000 parameters, the maximum is 65535
+# Chunking every 32767 allows inserting the most rows considering we have two parameters per row
+1..1_000_000
+|> Enum.chunk_every(32767)
+|> Enum.each(fn chunk ->
+  users =
+    Enum.map(chunk, fn _ ->
+      %{
+        inserted_at: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second),
+        updated_at: NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
+      }
+    end)
 
-Ecto.Multi.new()
-|> Ecto.Multi.insert_all(entries)
-|> PointsApi.Repo.transaction()
+  PointsApi.Repo.insert_all(PointsApi.User, users)
+end)
