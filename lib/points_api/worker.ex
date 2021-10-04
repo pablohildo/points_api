@@ -29,6 +29,8 @@ defmodule PointsApi.Worker do
     users =
       from(u in User,
         where: u.points > ^max_number,
+        # Ordering by random makes results more diverse
+        order_by: fragment("RANDOM()"),
         limit: 2
       )
       |> Repo.all()
