@@ -18,4 +18,10 @@ defmodule PointsApi.WorkerTest do
       assert not is_nil(timestamp)
     end
   end
+
+  describe "handle_info/2" do
+    test "processes correctly" do
+      assert {:noreply, _} = Worker.handle_info(:tick, {10, NaiveDateTime.utc_now()})
+    end
+  end
 end
