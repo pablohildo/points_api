@@ -14,7 +14,7 @@ defmodule PointsApi.User do
     |> cast(attrs, [:points])
     |> validate_required([:points])
     |> validate_number(:points, greater_than_or_equal_to: 0)
-    |> validate_number(:points, lesser_than_or_equal_to: 100)
+    |> validate_number(:points, less_than_or_equal_to: 100)
     |> validate_required(:points)
   end
 end
