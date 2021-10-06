@@ -1,7 +1,6 @@
 defmodule PointsApi.Worker do
   use GenServer
-  import Ecto.Query, only: [from: 2]
-  alias PointsApi.{Repo, User}
+  alias PointsApi.Points
 
   def start_link(_) do
     GenServer.start_link(__MODULE__, [], name: PointsWorker)
@@ -15,27 +14,17 @@ defmodule PointsApi.Worker do
   end
 
   def handle_info(:tick, {_, timestamp}) do
-    from(u in User,
-      update: [set: [points: fragment("floor(random()*100)"), updated_at: fragment("now()")]]
-    )
-    |> Repo.update_all([])
+    Points.randomize_all_points()
 
     Process.send_after(self(), :tick, :timer.minutes(1))
 
     {:noreply, {Enum.random(0..100), timestamp}}
   end
 
-  def handle_call(:retrieve, _, {max_number, timestamp}) do
-    users =
-      from(u in User,
-        where: u.points > ^max_number,
-        # Ordering by random makes results more diverse
-        order_by: fragment("RANDOM()"),
-        limit: 2
-      )
-      |> Repo.all()
+  def handle_call(:retrieve, _, {max_points, timestamp}) do
+    users = Points.list_users_by_points(max_points)
 
-    {:reply, %{users: users, timestamp: timestamp}, {max_number, NaiveDateTime.utc_now()}}
+    {:reply, %{users: users, timestamp: timestamp}, {max_points, NaiveDateTime.utc_now()}}
   end
 
   def retrieve() do

@@ -1,7 +1,7 @@
-defmodule PointsApi.UserTest do
+defmodule PointsApi.Points.UserTest do
   use PointsApi.DataCase
 
-  alias PointsApi.User
+  alias PointsApi.Points.User
 
   test "points must be an integer between 0 and 100" do
     invalid_attrs = [

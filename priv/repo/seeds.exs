@@ -11,5 +11,5 @@
       }
     end)
 
-  PointsApi.Repo.insert_all(PointsApi.User, users)
+  PointsApi.Points.insert_all_users(users)
 end)

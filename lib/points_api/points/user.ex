@@ -1,4 +1,4 @@
-defmodule PointsApi.User do
+defmodule PointsApi.Points.User do
   use Ecto.Schema
   import Ecto.Changeset
 

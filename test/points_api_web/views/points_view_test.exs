@@ -4,7 +4,7 @@ defmodule PointsApiWeb.UserViewTest do
   # Bring render/3 and render_to_string/3 for testing custom views
   import Phoenix.View
 
-  alias PointsApi.User
+  alias PointsApi.Points.User
 
   @date NaiveDateTime.from_iso8601!("2021-12-31T23:59:59")
   @valid_user %User{points: 50, id: 1, inserted_at: @date, updated_at: @date}

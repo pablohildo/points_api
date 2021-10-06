@@ -9,7 +9,7 @@ defmodule PointsApiWeb.PointsView do
     }
   end
 
-  def render("user.json", %{points: %PointsApi.User{} = user}) do
+  def render("user.json", %{points: %PointsApi.Points.User{} = user}) do
     %{
       id: user.id,
       points: user.points
