@@ -4,14 +4,14 @@ defmodule PointsApi.Worker do
   alias PointsApi.{Repo, User}
 
   def start_link(_) do
-    GenServer.start_link(__MODULE__, {0, nil}, name: PointsWorker)
+    GenServer.start_link(__MODULE__, [], name: PointsWorker)
   end
 
   # {max_number, timestamp}
   def init(_) do
     Process.send_after(self(), :tick, :timer.minutes(1))
 
-    {:ok, {0, nil}}
+    {:ok, {Enum.random(0..100), nil}}
   end
 
   def handle_info(:tick, {_, timestamp}) do
