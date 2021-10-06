@@ -22,7 +22,6 @@ defmodule PointsApiWeb do
       use Phoenix.Controller, namespace: PointsApiWeb
 
       import Plug.Conn
-      import PointsApiWeb.Gettext
       alias PointsApiWeb.Router.Helpers, as: Routes
     end
   end
@@ -51,20 +50,11 @@ defmodule PointsApiWeb do
     end
   end
 
-  def channel do
-    quote do
-      use Phoenix.Channel
-      import PointsApiWeb.Gettext
-    end
-  end
-
   defp view_helpers do
     quote do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import PointsApiWeb.ErrorHelpers
-      import PointsApiWeb.Gettext
       alias PointsApiWeb.Router.Helpers, as: Routes
     end
   end
