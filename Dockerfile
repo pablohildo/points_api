@@ -13,5 +13,5 @@ RUN mix do deps.get, deps.compile
 COPY . ./
 RUN mix compile
 
-CMD mix ecto.setup; mix phx.server
+CMD mix phx.server
 
