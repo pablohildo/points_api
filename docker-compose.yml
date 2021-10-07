@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      context: .
+      args:
+        MIX_ENV: dev
+    depends_on:
+      - db
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/points_api_vol
+      - ./config:/app/config:ro
+      - ./lib:/app/lib:ro
+      - ./priv:/app/priv
+      - ./test:/app/test:ro
+      - ./mix.exs:/app/mix.exs:ro
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=points
+      - POSTGRES_PASSWORD=points
+      - POSTGRES_DB=points
+    volumes:
+      - .:/points_db_vol

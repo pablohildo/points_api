@@ -1,0 +1,7 @@
+{
+    "skip_files": [
+        "lib/points_api_web.ex",
+        "lib/points_api/application.ex",
+        "lib/points_api_web/controllers/fallback_controller.ex"
+    ]
+}
