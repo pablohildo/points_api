@@ -13,8 +13,6 @@ defmodule PointsApi.Application do
       # Start the Endpoint (http/https)
       PointsApiWeb.Endpoint,
       PointsApi.Worker
-      # Start a worker by calling: PointsApi.Worker.start_link(arg)
-      # {PointsApi.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
