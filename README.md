@@ -47,7 +47,7 @@ docker-compose build
 docker-compose run api mix ecto.setup
 docker-compose up
 ```
-This will also create your database, table and and seed it with a million users with zero points, while also startint Phoenix endpoint.
+This will also create your database, table and and seed it with a million users with zero points, while also starting the Phoenix endpoint.
 
 
 **In both cases, now you can visit [`localhost:4000`](http://localhost:4000) from your browser or HTTP Client.**
@@ -75,7 +75,6 @@ After one minute and the first access, the timestamp will represent the last tim
   ]
 }
 ```
-Although
 
 ## Tests
 
