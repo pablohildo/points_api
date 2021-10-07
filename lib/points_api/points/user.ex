@@ -1,4 +1,7 @@
 defmodule PointsApi.Points.User do
+  @moduledoc """
+  User schema containing their points
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

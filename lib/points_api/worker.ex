@@ -1,4 +1,8 @@
 defmodule PointsApi.Worker do
+  @moduledoc """
+  Points worker responsible for updating and retrieving user points
+  based on it's state {max_number, timestamp}
+  """
   use GenServer
   alias PointsApi.Points
 
@@ -27,7 +31,10 @@ defmodule PointsApi.Worker do
     {:reply, %{users: users, timestamp: timestamp}, {max_points, NaiveDateTime.utc_now()}}
   end
 
-  def retrieve() do
+  @doc """
+  Makes a call to the genserver retrieving the users and the timestamp of the last call
+  """
+  def retrieve do
     GenServer.call(PointsWorker, :retrieve)
   end
 end
