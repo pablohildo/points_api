@@ -56,6 +56,7 @@ This will also create your database, table and and seed it with a million users 
 
 [`localhost:4000`](http://localhost:4000) or `/` is the only endpoint, and it's return will probably look like that on the first access:
 
+`GET localhost:4000`
 ```js
 {"timestamp": null,"users":[]}
 ```
@@ -64,6 +65,7 @@ If it is your first time making a request, the timestamp will be `null` since it
 
 After one minute and the first access, the timestamp will represent the last time a request was made, `max_number` will have a new value, `users` will have their points randomized and the response will probably look like that:
 
+`GET localhost:4000`
 ```js
 {
   "timestamp":"2021-10-07T06:45:02.569715",
