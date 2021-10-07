@@ -6,10 +6,10 @@ import Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :points_api, PointsApi.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "points",
+  password: "points",
   database: "points_api_test#{System.get_env("MIX_TEST_PARTITION")}",
-  hostname: "localhost",
+  hostname: "db",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 
@@ -25,3 +25,6 @@ config :logger, level: :warn
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+# Mocks Worker GenServer
+config :points_api, worker: PointsApi.WorkerMock

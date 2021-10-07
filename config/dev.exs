@@ -2,12 +2,13 @@ import Config
 
 # Configure your database
 config :points_api, PointsApi.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "points_api_dev",
-  hostname: "localhost",
+  username: "points",
+  password: "points",
+  database: "points",
+  hostname: "db",
   show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  pool_size: 10,
+  timeout: 100_000
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -58,3 +59,9 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+try do
+  import_config "dev.secret.exs"
+rescue
+  _ -> nil
+end
